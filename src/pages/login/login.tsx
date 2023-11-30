@@ -35,6 +35,7 @@ function Login() {
         .then(function (response) {
             console.log(response);
             if (response.data.auth) {
+                localStorage.setItem("info", JSON.stringify(user))
                 setLoggedInSuccess(true);
             } else {
                 setShow(true)
@@ -42,6 +43,8 @@ function Login() {
                     name: '',
                     password: '',
                 })
+                localStorage.removeItem('info')
+                console.log(localStorage.getItem("info"))
             }
         })
     };
