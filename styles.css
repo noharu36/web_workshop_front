@@ -1,0 +1,27 @@
+body {
+    background-color: beige; /* ベージュをメインの色に設定 */
+    font-family: Arial, sans-serif;
+}
+
+/* 画面全体を中央に寄せるスタイル */
+div {
+    margin: 50px auto;
+    text-align: center;
+}
+
+/* フォームのスタイル */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* タスク一覧のスタイル */
+#taskList {
+    margin-top: 20px;
+}
+
+/* 共有画面で写真を追加するボタンのスタイル */
+#photoInput {
+    margin-top: 20px;
+}
