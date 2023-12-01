@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 import React from 'react';
 import './home.css'
+=======
+import { Navigate } from "react-router-dom";
+>>>>>>> e50664baa04b407281936a60dde05e49096e7000
 
 function Home() {
+    const userInfo = localStorage.getItem("info");
+    console.log(userInfo)
+    if (userInfo == null) {
+        return <Navigate to="login" />
+    }
     return (
         <div className="container">
             <header className="header">
