@@ -6,9 +6,11 @@ import './login.css'
 
 function Login() {
     const [user, setUser] = useState({
+        id: 0,
         name: '',
         password: '',
     });
+
 
     const [loggedInSuccess, setLoggedInSuccess] = useState(false);
 
@@ -33,17 +35,18 @@ function Login() {
             password: user.password
         })
         .then(function (response) {
-            console.log(response);
             if (response.data.auth) {
-                localStorage.setItem("info", JSON.stringify(user))
+                localStorage.setItem("info", JSON.stringify({ ...user, id: response.data.id }))
                 setLoggedInSuccess(true);
             } else {
                 setShow(true)
                 setUser({
+                    id: 0,
                     name: '',
                     password: '',
                 })
                 localStorage.removeItem('info')
+                console.log(user)
                 console.log(localStorage.getItem("info"))
             }
         })
