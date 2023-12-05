@@ -35,11 +35,10 @@ function CreateRoom({show, setShow}:{show:boolean, setShow: React.Dispatch<React
             place: info.place,
             purpose: info.purpose,
             comment: info.comment,
-            user_id: userInfo.id,
-            user_name: userInfo.name
+            create_user_id: userInfo.id,
+            create_user_name: userInfo.name,
         })
-        .then(function (response) {
-            console.log(response)
+        .then(() => {
             setShow(false)
             setInfo({
                 title: "",

@@ -1,104 +1,90 @@
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
+import axios from 'axios';
 import './home.css'
 import { Navigate } from "react-router-dom";
 import CreateRoom from '../../assets/roomCreate';
 
 function Home() {
-    const userInfo = localStorage.getItem("info");
+    interface UserInfo {
+        id: number;
+        name: string;
+        password: string;
+    }
+    const userInfo: UserInfo = JSON.parse(localStorage.getItem("info")!);
     if (userInfo == null) {
         return <Navigate to="login" />
     }
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [show, setShow] = useState(false);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [room, setRoom] = useState([]);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [join, setJoin] = useState(0);
+
+    const get_url: string = 'http://127.0.0.1:8080/';
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        axios.get(get_url)
+        .then(function(response) {
+            console.log(response)
+            setRoom(response.data.threads)
+        })
+    }, [show])
+
+    const handleParticipation = (id: number, title: string) => {
+        if (join==id) {
+            return alert("すでに参加しています")
+        }
+        const tableName = `${userInfo.name}_${userInfo.id}`
+        const join_url = 'http://127.0.0.1:8080/join';
+        axios.post(join_url ,{
+            id: id,
+            title: title,
+            user_id: userInfo.id,
+            name: tableName
+        })
+        .then(() => {
+            setJoin(id)
+            {<Navigate to="mypage" />}
+        })
+    }
+
+    const displayRoom = room.map((value: {id: number; title: string; subject: string; place: string; purpose: string; comment: string; create_user_id: number; create_user_name: string; create_at: string; }) => {
+            return (
+                <>
+                    <div className='room'>
+                        <h3 className='title'>{value.title}</h3>
+                        <p className='subject'>{value.subject}</p>
+                        <p className='place'>{value.place}</p>
+                        <p className='purpose'>{value.purpose}</p>
+                        <p className='comment'>{value.comment}</p>
+                        <p className='createAt'>{value.create_at}</p>
+                        <input className='joinButton' type='button' value='参加' onClick={() => {handleParticipation(value.id, value.title)}} />
+                    </div>
+                </>
+            )
+        })
 
 
     return (
-        <div className="container">
-            <header className="header">
-                <div className="button-container">
-                    <img id='logo' src='/images/Uniconnect_logo.png' />
-                    <input id='taskButton' type="button" value="タスク" />
-                    <input id='fileButton' type="button" value="ファイル" />
-                    <input id='calenderButton' type="button" value="カレンダー" />
-                </div>
-            </header>
-            <main className="main-content">
-                <div className='post'>
-                    <div className='soccer'>
-                        {/* 写真 */}
-                        <div className="image-container">
-                            <img id='soccer_boy' src='/images/sports_soccer_boy.png' alt="サッカー" />
-                        </div>
-
-                        {/* 説明文 */}
-                        <div className="box">
-                            <p>
-                                サッカーやろうぜ！<br />
-                                場所:会津大学グラウンド<br />
-                                日時:1/13 11:00~<br />
-                            </p>
-                        </div>
-
-                        <input id='joinButton' type="button" value="参加" />
+        <>
+            <div className="container">
+                <header className="header">
+                    <div className="button-container">
+                        <img id='Logo' src='/images/Uniconnect_logo.png' />
+                        <input id='taskButton' type="button" value="タスク" />
+                        <input id='fileButton' type="button" value="ファイル" />
+                        <input id='calenderButton' type="button" value="カレンダー" />
                     </div>
-
-                    <div className='study'>
-                        {/* 写真 */}
-                        <div className="image-container">
-                            <img id='soccer_boy' src='/images/study_night_boy.png' alt="サッカー" />
-                        </div>
-
-                        {/* 説明文 */}
-                        <div className="box">
-                            <p>
-                                線形代数一緒に勉強しませんか？<br />
-                                場所:会津大学図書館<br />
-                                日時:1/17 9:00~<br />
-                            </p>
-                        </div>
-
-                        <input id='joinButton' type="button" value="参加" />
-                    </div>
-
-                    <div className='programming'>
-                        {/* 写真 */}
-                        <div className="image-container">
-                            <img id='soccer_boy' src='/images/computer_mob_programming.png' alt="サッカー" />
-                        </div>
-
-                        {/* 説明文 */}
-                        <div className="box">
-                            <p>
-                                C++一緒に勉強しませんか？<br />
-                                場所:UBIC<br />
-                                日時:3/01 19:00~<br />
-                            </p>
-                        </div>
-
-                        <input id='joinButton' type="button" value="参加" />
-                    </div>
-
-                    <div className='girlfriend'>
-                        {/* 写真 */}
-                        <div className="image-container">
-                            <img id='soccer_boy' src='/images/couple_dakitsuku_man.png' alt="サッカー" />
-                        </div>
-
-                        {/* 説明文 */}
-                        <div className="box">
-                            <p>
-                                彼女募集中！<br />
-                            </p>
-                        </div>
-
-                        <input id='joinButton' type="button" value="参加" />
-                    </div>
-                </div>
-                <input id='createButton' type='button' value='作成' onClick={() => setShow(true)}/>
-                <CreateRoom show = {show} setShow = {setShow}/>
-            </main>
-        </div>
+                </header>
+                <main className="main-content">
+                    <div className='post'>{displayRoom}</div>
+                    <input id='createButton' type='button' value='作成' onClick={() => setShow(true)}/>
+                    <CreateRoom show = {show} setShow = {setShow}/>
+                </main>
+            </div>
+        </>
     )
 }
 
