@@ -54,12 +54,14 @@ function Home() {
             return (
                 <>
                     <div className='room'>
-                        <h3 className='title'>{value.title}</h3>
-                        <p className='subject'>{value.subject}</p>
-                        <p className='place'>{value.place}</p>
-                        <p className='purpose'>{value.purpose}</p>
-                        <p className='comment'>{value.comment}</p>
-                        <p className='createAt'>{value.create_at}</p>
+                        <div className='roomInfo'>
+                            <h3 className='title'>{value.title}</h3>
+                            <p className='subject'>教科: {value.subject}</p>
+                            <p className='place'>場所: {value.place}</p>
+                            <p className='purpose'>目的: {value.purpose}</p>
+                            <p className='comment'>コメント: {value.comment}</p>
+                            <p className='createAt'>{value.create_at}</p>
+                        </div>
                         <input className='joinButton' type='button' value='参加' onClick={() => {handleParticipation(value.id, value.title)}} />
                     </div>
                 </>
@@ -71,14 +73,15 @@ function Home() {
         <>
             <div className="container">
                 <header className="header">
+                    <img id='Logo' src='/images/Uniconnect_logo.png' />
                     <div className="button-container">
-                        <img id='Logo' src='/images/Uniconnect_logo.png' />
                         <input id='taskButton' type="button" value="タスク" />
                         <input id='fileButton' type="button" value="ファイル" />
                         <input id='calenderButton' type="button" value="カレンダー" />
                     </div>
                 </header>
                 <main className="main-content">
+                    <p>ルーム一覧</p>
                     <div className='post'>{displayRoom}</div>
                     <input id='createButton' type='button' value='作成' onClick={() => setShow(true)}/>
                     <CreateRoom show = {show} setShow = {setShow}/>
