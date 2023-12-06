@@ -53,9 +53,9 @@ function CreateRoom({show, setShow}:{show:boolean, setShow: React.Dispatch<React
 
     if (show) {
         return (
-            <div id="overlay">
-            <div id="content">
-                <form className='form' onSubmit={handleSubmit}>
+            <div id="over-lay">
+            <div id="form-content">
+                <form className='roomForm' onSubmit={handleSubmit}>
                     <label>
                         <h3>  タイトル </h3>
                         <input className='inputArea'
@@ -99,7 +99,7 @@ function CreateRoom({show, setShow}:{show:boolean, setShow: React.Dispatch<React
                         />
                     </label>
                     <br />
-                    <input id='submitButton' type="submit" value="投稿"/>
+                    <input id='submitRoomButton' type="submit" value="投稿"/>
                     <input id='cancelButton' type="button" value="キャンセル" onClick={() => setShow(false)}/>
                 </form>
             </div>

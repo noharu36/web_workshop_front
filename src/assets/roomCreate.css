@@ -1,0 +1,41 @@
+#over-lay {
+    z-index: 1000;
+    /*画面全体を覆う設定*/
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.5);
+
+    /*画面の中央に要素を表示させる設定*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#form-content {
+    width: 30%;
+    padding: 2em;
+    background: #fff;
+}
+
+#submitRoomButton {
+    margin: 3%;
+    width: 30%;
+    height: 2em;
+    font-size: 1.3em;
+    color: #fff;
+    background-color: #000;
+    border-radius: 20px;
+}
+
+#cancelButton {
+    margin: 3%;
+    width: 30%;
+    height: 2em;
+    font-size: 1.3em;
+    color: #fff;
+    background-color: #000;
+    border-radius: 20px;
+}

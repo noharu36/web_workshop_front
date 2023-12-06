@@ -17,7 +17,7 @@ body {
     /* 茶色の背景 */
     justify-content: space-between;
     /* ヘッダーの左右のコンテンツを均等に配置 */
-    align-items: center; 
+    align-items: center;
     /* コンテンツを垂直方向の中央に配置 */
     padding: 6px 0px;
     /* 内側の余白 */
@@ -35,7 +35,7 @@ body {
 
 
 #Logo {
-    position: absolute;
+
     /* ロゴをヘッダー内で自由に動かせるようにする */
     top: 0;
     /* ヘッダーの上端からの位置 */
@@ -47,6 +47,7 @@ body {
 }
 
 .button-container {
+    width: 30%;
     display: flex;
     /* ボタン間の間隔を均等に */
     align-items: center;
@@ -55,11 +56,12 @@ body {
     /* ボタンを水平方向の中央に */
     margin-left: auto;
     /* 左側の要素から余白を取って右に配置 */
+    padding: 0 5% 0 5%;;
 }
 
 #taskButton {
     margin: 0%;
-    width: 50%;
+    width: 30%;
     height: 2.5em;
     top: 0;
     font-size: 1.3em;
@@ -70,7 +72,7 @@ body {
 
 #fileButton {
     margin: 0%;
-    width: 50%;
+    width: 30%;
     height: 2.5em;
     font-size: 1.3em;
     color: #000;
@@ -80,7 +82,7 @@ body {
 
 #calenderButton {
     margin: 0%;
-    width: 50%;
+    width: 30%;
     height: 2.5em;
     font-size: 1.3em;
     color: #000;
@@ -88,69 +90,66 @@ body {
     border-radius: 20px 20px;
 }
 
+
+
+.main-content > p {
+    padding-top: 5%;
+    margin-bottom: 3%;
+    font-size: 2em;
+}
+
 .post {
     display: flex;
-    margin: 0 10px;
+    margin: 3%;
 }
 
-
-.image-container {
-    margin: 0 10px;
-    width: 200px;
-    /* 希望する幅に設定 */
-    height: 200px;
-    /* 希望する高さに設定 */
-    overflow: hidden;
-    /* 画像がコンテナを超えた場合に非表示にする */
-    position: relative;
-    /* 子要素を絶対位置で配置するための基準点 */
-    border: 2px solid black;
-    /* 黒色のボーダーを設定 */
+.room {
+    width: 250px;
+    height: 350px;
 }
 
-.image-container img {
-    width: 100%;
-    /* コンテナの幅に合わせて画像を拡大/縮小 */
-    height: auto;
-    /* 画像の縦横比を維持 */
-    position: absolute;
-    /* 必要に応じて絶対位置で調整 */
-    top: 50%;
-    /* 上下中央に配置 */
-    left: 50%;
-    /* 左右中央に配置 */
-    transform: translate(-50%, -50%);
-    /* 真ん中に来るように微調整 */
+.roomInfo {
+    border: 1px solid #000;
+    border-radius: 20px 20px;
+    box-sizing: border-box;
+    box-shadow: 0 5px 5px gray;
+    margin: 5%;
 }
 
-.pre-filled-textbox {
-    width: 100%;
-    /* ボックスの幅を親要素の100%に設定 */
-    height: 150px;
-    /* 高さを適宜設定 */
-    border: 2px solid black;
-    /* 黒色のボーダーを設定 */
-    padding: 5px;
-    /* テキストとボーダーの間のスペースを設定 */
-    background-color: #f9f9f9;
-    /* 背景色を設定 */
-    color: #333;
-    /* テキストの色を設定 */
-    font-size: 16px;
-    /* フォントサイズを適宜設定 */
-    resize: none;
-    /* サイズ変更を無効化 */
+.title {
+    margin-bottom: 2em;
+    border-bottom: 1px solid #000;
 }
 
-.box {
-    margin: 0 10px; 
-    width: 180px;
-    /* 固定幅 */
-    height: 150px;
-    /* 固定高さ */
-    border: #000 1px solid;
-    /*境界線の指定*/
-    padding: 10px;
-    overflow: auto;
-    /* コンテンツがはみ出る場合はスクロールバーを表示 */
+.subject, .place, .purpose, .comment {
+    text-align: left;
+    padding-left: 20%;
+}
+
+.createAt {
+    padding-right: 5%;
+    color: gray;
+    font-size: 0.7em;
+    text-align: right;
+}
+
+.joinButton {
+    width: 5em;
+    height: 2.5em;
+    border-radius: 15px 15px;
+    background-color: red;
+    color: #FFF;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#createButton {
+    margin-top: 5%;
+    width: 5em;
+    height: 2.5em;
+    border-radius: 15px 15px;
+    background-color: #000;
+    color: #FFF;
+    font-size: 1.2em;
+    font-weight: bold;
 }
